@@ -35,6 +35,7 @@ export interface ContemberTranslationProviderProps {
 	stage: string
 	domain: string | string[]
 	initialLanguage: string
+	onCurrentLanguageChange?: (language: string) => void
 }
 
 export const ContemberTranslationProvider: React.FunctionComponent<ContemberTranslationProviderProps> = (
@@ -88,7 +89,12 @@ export const ContemberTranslationProvider: React.FunctionComponent<ContemberTran
 		}
 	}, [currentLanguage])
 
-	const setLanguage = (language: string) => setCurrentLanguage(language)
+	const setLanguage = (language: string) => {
+		if (props.onCurrentLanguageChange) {
+			props.onCurrentLanguageChange(language)
+		}
+		setCurrentLanguage(language)
+	}
 	const isLoadingInitialLanguage =
 		isLoadingTranslations &&
 		typeof allTranslations[props.initialLanguage] === 'undefined'
