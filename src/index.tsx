@@ -7,6 +7,7 @@ const ContemberTranslationContext = React.createContext({
 	isLoadingInitialLanguage: true,
 	isLoadingAnotherLanguage: false,
 	isError: false,
+	currentLanguage: '',
 })
 
 const TRANSLATIONS_BASE_URL = 'https://translations-gw.mgw.cz/get'
@@ -110,6 +111,7 @@ export const ContemberTranslationProvider: React.FunctionComponent<ContemberTran
 				isLoadingInitialLanguage,
 				isLoadingAnotherLanguage,
 				isError,
+				currentLanguage,
 			}}
 		>
 			{props.children}
@@ -127,3 +129,5 @@ export const useIsLoadingAnotherLanguage = () =>
 	React.useContext(ContemberTranslationContext).isLoadingAnotherLanguage
 export const useIsError = () =>
 	React.useContext(ContemberTranslationContext).isError
+export const useCurrentLanguage = () =>
+	React.useContext(ContemberTranslationContext).currentLanguage
